@@ -6,6 +6,8 @@ import com.zerobase.fastlms.admin.dto.MemberDto;
 import com.zerobase.fastlms.admin.model.MemberParam;
 import com.zerobase.fastlms.admin.model.MemberInput;
 import com.zerobase.fastlms.course.controller.BaseController;
+import com.zerobase.fastlms.member.entity.LoginHistory;
+import com.zerobase.fastlms.member.repository.LoginHistoryRepository;
 import com.zerobase.fastlms.member.service.MemberService;
 import com.zerobase.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +23,14 @@ import java.util.List;
 public class AdminMemberController extends BaseController {
     
     private final MemberService memberService;
+    private final LoginHistoryRepository loginHistoryRepository;
     
     @GetMapping("/admin/member/list.do")
     public String list(Model model, MemberParam parameter) {
         
         parameter.init();
         List<MemberDto> members = memberService.list(parameter);
-        
+
         long totalCount = 0;
         if (members != null && members.size() > 0) {
             totalCount = members.get(0).getTotalCount();

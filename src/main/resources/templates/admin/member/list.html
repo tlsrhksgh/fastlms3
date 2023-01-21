@@ -100,6 +100,13 @@
                         <p th:if="${x.adminYn}">Y</p>
                         <p th:if="${x.adminYn eq false}">N</p>
                     </td>
+                    <td>
+                        <p th:if="${x.adminYn}">Y</p>
+                        <p th:if="${x.adminYn eq false}">N</p>
+                    </td>
+                <td>
+                    <p th:text="${x.latelyLoginHistory}"></p>
+                </td>
                 </tr>
             </tbody>
         </table>
