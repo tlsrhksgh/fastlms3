@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+</head>
+<body>
+    <h1>메인 페이지 </h1>
+    <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+    <div th:each="x : ${banners}">
+        <a th:href="${x.linkAddr}" th:target="${x.openMode == '새창' ? '_blank' : ''}">
+            <img th:src="${x.urlFilename}" width="600" height="400"/>
+        </a>
+    </div>
+
+</body>
+</html>
