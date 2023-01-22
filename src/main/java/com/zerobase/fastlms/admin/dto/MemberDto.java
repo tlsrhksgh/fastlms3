@@ -39,7 +39,8 @@ public class MemberDto {
     //추가컬럼
     long totalCount;
     long seq;
-    
+
+    LocalDateTime latelyLoginDate;
     
     public static MemberDto of(Member member) {
         

@@ -40,9 +40,7 @@ public class MainController {
 
         boolean publicYn = true;
         List<BannerDto> banners = bannerService.getBannerBySortValue(publicYn);
-        if(CollectionUtils.isEmpty(banners)) {
-            System.out.println("banners :" + banners.size());
-        } else {
+        if(!CollectionUtils.isEmpty(banners)) {
             model.addAttribute("banners", banners);
         }
 

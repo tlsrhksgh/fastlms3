@@ -144,7 +144,8 @@ public class CourseServiceImpl implements CourseService {
             List<Course> courseList = courseRepository.findAll();
             return CourseDto.of(courseList);
         }
-        
+
+
         Optional<List<Course>> optionalCourses = courseRepository.findByCategoryId(parameter.getCategoryId());
         if (optionalCourses.isPresent()) {
             return CourseDto.of(optionalCourses.get());

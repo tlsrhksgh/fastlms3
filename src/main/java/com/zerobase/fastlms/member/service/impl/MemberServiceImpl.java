@@ -20,6 +20,7 @@ import com.zerobase.fastlms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -135,11 +136,21 @@ public class MemberServiceImpl implements MemberService {
         long totalCount = memberMapper.selectListCount(parameter);
         
         List<MemberDto> list = memberMapper.selectList(parameter);
+
         if (!CollectionUtils.isEmpty(list)) {
             int i = 0;
             for(MemberDto x : list) {
+                String userId = list.get(i).getUserId();
+                LoginHistory latelyLoginHistory = loginHistoryRepository.findTop1ByUserIdOrderByLoginDtDesc(userId);
+                if(latelyLoginHistory != null) {
+                    x.setLatelyLoginDate(latelyLoginHistory.getLoginDt());
+                } else {
+
+                }
+
                 x.setTotalCount(totalCount);
                 x.setSeq(totalCount - parameter.getPageStart() - i);
+                x.setLatelyLoginDate(latelyLoginHistory.getLoginDt());
                 i++;
             }
         }
@@ -147,8 +158,6 @@ public class MemberServiceImpl implements MemberService {
         loginHistoryList(parameter.getUserId());
         
         return list;
-        
-        //return memberRepository.findAll();
     }
 
     @Override

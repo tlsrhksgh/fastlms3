@@ -31,6 +31,8 @@ public class AdminMemberController extends BaseController {
         parameter.init();
         List<MemberDto> members = memberService.list(parameter);
 
+        System.out.println(members);
+
         long totalCount = 0;
         if (members != null && members.size() > 0) {
             totalCount = members.get(0).getTotalCount();

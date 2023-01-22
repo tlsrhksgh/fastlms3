@@ -9,4 +9,6 @@ import java.util.List;
 public interface LoginHistoryRepository extends JpaRepository<LoginHistory, Long> {
 
     List<LoginHistory> findByUserId(String userId);
+
+    LoginHistory findTop1ByUserIdOrderByLoginDtDesc(String UserId);
 }
